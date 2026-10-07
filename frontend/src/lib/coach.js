@@ -1,3 +1,4 @@
+import { LOCAL_ONLY } from './demo.js'
 // The AI Coach, on the client side: everything that decides what a proposal *does* to a plan.
 //
 // The server produces proposals; it never writes into your state. Applying one is ordinary
@@ -59,7 +60,7 @@ const coachOf = s => (s.coach = s.coach || emptyCoach())
 // phone that brought its own API key runs the Coach itself (lib/coach-local.js). Nothing
 // chosen means nothing shown — the same "invisible unless configured" promise the web keeps.
 export const coachAvailable = (config, user, { demo, mobile, coachMode } = {}) =>
-  mobile ? (coachMode === 'byok' || !!(config?.coach?.enabled && user))
+  LOCAL_ONLY ? false : mobile ? (coachMode === 'byok' || !!(config?.coach?.enabled && user))
     : demo ? true : !!(config?.coach?.enabled && user)
 
 // What each data category means, in the user's words. Rendered from the same list the payload

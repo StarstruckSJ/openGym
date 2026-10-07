@@ -1,3 +1,4 @@
+import { LOCAL_ONLY } from '../lib/demo.js'
 // Settings (v1.3.11): which page each row lives on, and the index the search field reads.
 //
 // The root holds eleven rows in four groups plus the account card; each opens a page at
@@ -136,7 +137,7 @@ export const SEARCH = [
   { page: 'account', title: 'Sign in with passkey', icon: 'fingerprint', tint: 'var(--blue)', kw: 'login sign in log in passkey', when: c => !c.mobile && !c.demo && !c.user && c.webauthn },
   { page: 'account', title: 'Sign in with password', icon: 'key', tint: 'var(--orange)', kw: 'login sign in log in password', when: c => !c.mobile && !c.demo && !c.user && c.pwOn },
   { page: 'account', title: 'Create passkey profile', icon: 'plusCircle', tint: 'var(--acc)', kw: 'register account sign up create profile', when: c => !c.mobile && !c.demo && !c.user && c.webauthn },
-  { page: 'account', title: 'Reset demo data', icon: 'reset', tint: 'var(--blue)', kw: 'demo reset example', when: c => c.demo },
+  { page: 'account', title: 'Reset demo data', icon: 'reset', tint: 'var(--blue)', kw: 'demo reset example', when: c => c.demo && !LOCAL_ONLY },
 ]
 
 // Lower case, accents and other marks dropped, so "théme", "Thème" and "theme" meet.

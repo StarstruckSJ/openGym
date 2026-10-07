@@ -3,7 +3,7 @@ import { useUI } from '../store/useUI.js'
 import { webauthnOK, passkeyLogin, passkeyRegister, passkeyError, bio } from '../lib/api.js'
 import { hasData } from '../store/useStore.js'
 import { t } from '../lib/i18n.js'
-import { DEMO, REPO } from '../lib/demo.js'
+import { DEMO, REPO, LOCAL_ONLY } from '../lib/demo.js'
 import { guestAllowed } from '../lib/guest.js'
 import { useState, useRef, useEffect } from 'react'
 import Icon from '../components/Icon.jsx'
@@ -82,6 +82,14 @@ export default function Login() {
   const wrap = { display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: '78vh', textAlign: 'center' }
 
   // Demo build: no backend to sign in against — the only way in is the local guest profile.
+  if (LOCAL_ONLY) return (
+    <div className="narrow" style={wrap}>
+      {head}
+      <p>Your personal workout log. Saved on this device, with no account or subscription.</p>
+      <Button variant="primary" icon="play" onClick={() => setGuest(true)}>Open my workouts</Button>
+      <p className="small muted">Export backups in Settings → Data &amp; backup. Clearing website data can erase your workouts.</p>
+    </div>
+  )
   if (DEMO) return (
     <div className="narrow" style={wrap}>
       {head}
